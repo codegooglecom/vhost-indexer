@@ -19,7 +19,7 @@ function StickyVariable($name, $default = null) {
   }
 }
 
-StickyVariable("VHOSTINDEXER_TITLE", '**Virtual hosts on this server');
+//StickyVariable("VHOSTINDEXER_TITLE", '**Virtual hosts on this server');
 print var_dump($VHOSTINDEXER_TITLE);
 
 $title = $VHOSTINDEXER_TITLE;
