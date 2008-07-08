@@ -127,12 +127,12 @@ $vhosts = parseVirtualHosts($vhost_conf);
         </div>
         <div id="footer">
             <?php if ($footer_content): ?>
-            <div id="footer_content">
+            <div id="footer_content" class="quiet">
                 <?php print $footer_content ?>
             </div>
             <?php endif; ?>
             <div id="credit">
-                Powered by <a href="http://code.google.com/p/vhost-indexer/">vhost-indexer</a>.
+                <p class="small quiet">This page is generated using <a href="http://code.google.com/p/vhost-indexer/">vhost-indexer</a></p>
             </div>
         </div>
     </body>
