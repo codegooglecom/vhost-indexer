@@ -32,17 +32,53 @@ function setVar($server_var,$default=null) {
   return isset($_SERVER[$server_var]) ? $_SERVER[$server_var] : $default;
 }
 
+function parseVirtualHosts($file) {
+  $fh = fopen($file, 'r') or exit("Unable to read $vhost_conf");
+  
+  $hostname = null;
+  $port = '80';
+  
+  while(!feof($fh)) {
+    $line = fgets($fh);
+    
+    if (preg_match("/<VirtualHost/i", $line)) {
+      preg_match("/<VirtualHost\s+(.+):(.+)\s*>/i", $line, $results);
+      if (isset($results[1])) {
+        $hostname = $results[1];
+      }
+      if (isset($results[2])) {
+        $port = $results[2];
+      }
+      $rule = true;
+    }
+    
+    if (preg_match("/<\/VirtualHost>/i", $line)) {
+      $vhosts[] = $hostname . ($port == '80' ? '' : ':'. $port);
+      $rule = false;
+    }
+    
+    if ($rule) {
+      if (preg_match("/ServerName/i", $line)) {
+        preg_match("/ServerName\s+(.+)\s*/i", $line, $results);
+        if (isset($results[1])) {
+          $hostname = $results[1];
+        }
+      }
+    }
+  }
+  fclose($fh);
+  
+  return $vhosts;
+}
+
 $vhost_conf = setVar('VHOSTINDEXER_VHOST_CONFIG', '/etc/httpd/conf.d/vhost.conf');
 $title = setVar('VHOSTINDEXER_TITLE', 'Virtual hosts on '. $_SERVER['HTTP_HOST']);
 $header_content = setVar('VHOSTINDEXER_HEADER_CONTENT');
-$pre_content = setVar('VHOSTINDEXER_PRE_CONTENT', '<p>These are the web servers that are hosted on this web server.</p>');
+$pre_content = setVar('VHOSTINDEXER_PRE_CONTENT', '<p>These are the web servers hosted here.</p>');
 $post_content = setVar('VHOSTINDEXER_POST_CONTENT');
 $footer_content = setVar('VHOSTINDEXER_FOOTER_CONTENT');
 $style_file = setVar('VHOSTINDEXER_CSS_FILE', 'style.css');
-
-$fh = fopen($vhost_conf, 'r');
-$vhost_raw = fgets($fh);
-fclose($fh);
+$vhosts = parseVirtualHosts($vhost_conf);
 
 ?>
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -76,7 +112,11 @@ fclose($fh);
             <?php endif; ?>
             <?php if ($vhosts): ?>
             <div id="content">
-                <?php print $vhosts ?>
+                <ul>
+                  <?php foreach($vhosts as $vhost): ?>
+                  <li><a href="http://<?php print $vhost ?>" title="Jump to this web site..."><?php print $vhost ?></a>
+                  <?php endforeach; ?>
+                </ul>
             </div>
             <?php endif; ?>
             <?php if ($post_content): ?>
