@@ -35,7 +35,7 @@ SetEnv VHOSTINDEXER_TITLE 'Virtual hosts on this server'
 
 #SetEnv VHOSTINDEXER_HEADER_CONTENT ''
 
-SetEnv VHOSTINDEXER_PRE_CONTENT '<p>These are the web servers that are hosted on this web server.</p>';
+SetEnv VHOSTINDEXER_PRE_CONTENT '<p>These are the web servers that are hosted on this web server.</p>'
 
 #SetEnv VHOSTINDEXER_POST_CONTENT ''
 
