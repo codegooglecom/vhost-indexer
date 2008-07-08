@@ -8,13 +8,13 @@
 function setVar($server_var,$default=null) {
   return isset($_SERVER[$server_var]) ? $_SERVER[$server_var] : $default;
 }
-
-$title = setVar('VHOSTINDEXER_TITLE','ARF');
-$header_content = $_SERVER["VHOSTINDEXER_HEADER_CONTENT"];
-$pre_content = $_SERVER["VHOSTINDEXER_PRE_CONTENT"];
-$post_content = $_SERVER["VHOSTINDEXER_POST_CONTENT"];
-$footer_content = $_SERVER["VHOSTINDEXER_FOOTER_CONTENT"];
-$style_file = $_SERVER["VHOSTINDEXER_CSS_FILE"];
+$vhost_conf = setVar('VHOSTINDEXER_VHOST_CONFIG', '/etc/httpd/conf.d/vhost.conf');
+$title = setVar('VHOSTINDEXER_TITLE', 'Virtual hosts on '. $_SERVER['HTTP_HOST']);
+$header_content = setVar('VHOSTINDEXER_HEADER_CONTENT');
+$pre_content = setVar('VHOSTINDEXER_PRE_CONTENT');
+$post_content = setVar('VHOSTINDEXER_POST_CONTENT');
+$footer_content = setVar('VHOSTINDEXER_FOOTER_CONTENT');
+$style_file = setVar('VHOSTINDEXER_CSS_FILE');
 
 $language = $_SERVER['$HTTP_ACCEPT_LANGUAGE'];
 
