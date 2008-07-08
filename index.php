@@ -2,18 +2,34 @@
 /**
  * @file Generate an index page which includes a list of virtual hosts 
  * on this system
+ * @author Alister Lewis-Bowen [alister@different.com]
+ * 
+ * StickyVariable function taken from http://bytes.com/forum/thread4089.html
  */
-print var_dump($GLOBALS);
 
-$vhost_conf = $_ENV["VHOSTINDEXER_VHOST_CONFIG"];
-$title = $_ENV["VHOSTINDEXER_TITLE"];
+function StickyVariable($name, $default = null) {
+  if(isset($_REQUEST[$name])) {
+    $GLOBALS[$name] = $_SESSION[$name] = $_REQUEST[$name];
+  }
+  else if(isset($_SESSION[$name])) {
+    $GLOBALS[$name] = $_SESSION[$name];
+  }
+  else {
+    $GLOBALS[$name] = $default;
+  }
+}
+
+StickyVariable("VHOSTINDEXER_TITLE", '**Virtual hosts on this server');
+print var_dump($VHOSTINDEXER_TITLE);
+
+$title = $VHOSTINDEXER_TITLE;
 $header_content = $_ENV["VHOSTINDEXER_HEADER_CONTENT"];
 $pre_content = $_ENV["VHOSTINDEXER_PRE_CONTENT"];
 $post_content = $_ENV["VHOSTINDEXER_POST_CONTENT"];
 $footer_content = $_ENV["VHOSTINDEXER_FOOTER_CONTENT"];
 $style_file = $_ENV["VHOSTINDEXER_CSS_FILE"];
 
-$language = $_ENV["HTTP_ACCEPT_LANGUAGE"];
+$language = $HTTP_ACCEPT_LANGUAGE;
 
 $fh = fopen($vhost_conf, 'r');
 $vhost_raw = fgets($fh);
