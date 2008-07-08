@@ -20,7 +20,7 @@ function StickyVariable($name, $default = null) {
 }
 
 //StickyVariable("VHOSTINDEXER_TITLE", '**Virtual hosts on this server');
-print var_dump($VHOSTINDEXER_TITLE);
+print var_dump($_SERVER['VHOSTINDEXER_TITLE']);
 
 $title = $VHOSTINDEXER_TITLE;
 $header_content = $_ENV["VHOSTINDEXER_HEADER_CONTENT"];
