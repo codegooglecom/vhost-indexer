@@ -142,3 +142,8 @@ caption     { background: #eee; }
 .last       { margin-right:0; padding-right:0; }
 .top        { margin-top:0; padding-top:0; }
 .bottom     { margin-bottom:0; padding-bottom:0; }
+
+/* Layout
+-------------------------------------------------------------- */
+
+body        { margin: 1em auto; width: 960px; }
