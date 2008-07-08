@@ -11,20 +11,19 @@ function setVar($server_var,$default=null) {
 $vhost_conf = setVar('VHOSTINDEXER_VHOST_CONFIG', '/etc/httpd/conf.d/vhost.conf');
 $title = setVar('VHOSTINDEXER_TITLE', 'Virtual hosts on '. $_SERVER['HTTP_HOST']);
 $header_content = setVar('VHOSTINDEXER_HEADER_CONTENT');
-$pre_content = setVar('VHOSTINDEXER_PRE_CONTENT');
+$pre_content = setVar('VHOSTINDEXER_PRE_CONTENT', '<p>These are the web servers that are hosted on this web server.</p>');
 $post_content = setVar('VHOSTINDEXER_POST_CONTENT');
 $footer_content = setVar('VHOSTINDEXER_FOOTER_CONTENT');
-$style_file = setVar('VHOSTINDEXER_CSS_FILE');
-
-$language = $_SERVER['$HTTP_ACCEPT_LANGUAGE'];
+$style_file = setVar('VHOSTINDEXER_CSS_FILE', 'style.css');
 
 $fh = fopen($vhost_conf, 'r');
 $vhost_raw = fgets($fh);
 fclose($fh);
+print var_dump($vhost_raw);
 
 ?>
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language; ?>" lang="<?php print $language; ?>">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>
