@@ -54,9 +54,9 @@ print var_dump($vhost_raw);
             <?php print $title ?>
         </title>
         <?php if ($style_file): ?>
-        <style type="text/css" media="all">@import "<?php print $style_file ?>"
-        </style>
+        <link href="<?php print $style_file ?>" type="text/css" media="all" rel="stylesheet"/>
         <?php endif; ?>
+        <link type="image/x-icon" href="favicon.ico" rel="shortcut icon"/>
     </head>
     <body>
         <div id="header">
@@ -65,12 +65,14 @@ print var_dump($vhost_raw);
             </h1>
             <?php if ($header_content): ?>
             <div id="header_content">
+                <?php print $header_content ?>
             </div>
             <?php endif; ?>
         </div>
         <div id="main">
             <?php if ($pre_content): ?>
             <div id="pre_content">
+                <?php print $pre_content ?>
             </div>
             <?php endif; ?>
             <?php if ($vhosts): ?>
@@ -80,16 +82,18 @@ print var_dump($vhost_raw);
             <?php endif; ?>
             <?php if ($post_content): ?>
             <div id="post_content">
+                <?php print $post_content ?>
             </div>
             <?php endif; ?>
         </div>
         <div id="footer">
             <?php if ($footer_content): ?>
             <div id="footer_content">
+                <?php print $footer_content ?>
             </div>
             <?php endif; ?>
             <div id="credit">
-                Powered by vhost-indexer, written by Alister Lewis-Bowen
+                Powered by <a href="http://code.google.com/p/vhost-indexer/">vhost-indexer</a>.
             </div>
         </div>
     </body>
