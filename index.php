@@ -43,7 +43,6 @@ $style_file = setVar('VHOSTINDEXER_CSS_FILE', 'style.css');
 $fh = fopen($vhost_conf, 'r');
 $vhost_raw = fgets($fh);
 fclose($fh);
-print var_dump($vhost_raw);
 
 ?>
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
