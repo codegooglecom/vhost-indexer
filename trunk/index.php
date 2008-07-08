@@ -3,33 +3,20 @@
  * @file Generate an index page which includes a list of virtual hosts 
  * on this system
  * @author Alister Lewis-Bowen [alister@different.com]
- * 
- * StickyVariable function taken from http://bytes.com/forum/thread4089.html
  */
 
-function StickyVariable($name, $default = null) {
-  if(isset($_REQUEST[$name])) {
-    $GLOBALS[$name] = $_SESSION[$name] = $_REQUEST[$name];
-  }
-  else if(isset($_SESSION[$name])) {
-    $GLOBALS[$name] = $_SESSION[$name];
-  }
-  else {
-    $GLOBALS[$name] = $default;
-  }
+function setVar($server_var,$default=null) {
+  return isset($_SERVER[$server_var]) ? $_SERVER[$server_var] : $default;
 }
 
-//StickyVariable("VHOSTINDEXER_TITLE", '**Virtual hosts on this server');
-print var_dump($_SERVER['VHOSTINDEXER_TITLE']);
+$title = setVar('VHOSTINDEXER_TITLE','ARF');
+$header_content = $_SERVER["VHOSTINDEXER_HEADER_CONTENT"];
+$pre_content = $_SERVER["VHOSTINDEXER_PRE_CONTENT"];
+$post_content = $_SERVER["VHOSTINDEXER_POST_CONTENT"];
+$footer_content = $_SERVER["VHOSTINDEXER_FOOTER_CONTENT"];
+$style_file = $_SERVER["VHOSTINDEXER_CSS_FILE"];
 
-$title = $VHOSTINDEXER_TITLE;
-$header_content = $_ENV["VHOSTINDEXER_HEADER_CONTENT"];
-$pre_content = $_ENV["VHOSTINDEXER_PRE_CONTENT"];
-$post_content = $_ENV["VHOSTINDEXER_POST_CONTENT"];
-$footer_content = $_ENV["VHOSTINDEXER_FOOTER_CONTENT"];
-$style_file = $_ENV["VHOSTINDEXER_CSS_FILE"];
-
-$language = $HTTP_ACCEPT_LANGUAGE;
+$language = $_SERVER['$HTTP_ACCEPT_LANGUAGE'];
 
 $fh = fopen($vhost_conf, 'r');
 $vhost_raw = fgets($fh);
