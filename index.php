@@ -3,6 +3,7 @@
  * @file Generate an index page which includes a list of virtual hosts 
  * on this system
  */
+print var_dump($GLOBALS);
 
 $vhost_conf = $_ENV["VHOSTINDEXER_VHOST_CONFIG"];
 $title = $_ENV["VHOSTINDEXER_TITLE"];
