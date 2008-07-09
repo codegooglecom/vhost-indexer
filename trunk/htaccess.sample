@@ -1,18 +1,44 @@
-
+#
 # This is the configuration for vhost-indexer. The following evironment
-# variables can be placed in any .htaccess file
+# variables can be placed in any .htaccess file in the same directory as
+# the index.php file.
+#
 # ----------------------------------------------------------------------------
 
+#
+# The location of your vhost configuration...
+#
 #SetEnv VHOSTINDEXER_VHOST_CONFIG '/etc/httpd/conf.d/vhost.conf'
 
+#
+# The name of the CSS file used to style the content of the index page...
+#
+#SetEnv VHOSTINDEXER_CSS_FILE 'style.css'
+
+#
+# The text used for the title of the index page...
+#
 #SetEnv VHOSTINDEXER_TITLE 'Virtual hosts on this server'
 
-#SetEnv VHOSTINDEXER_HEADER_CONTENT ''
+#
+# The content that should be placed in the header division of the index page after
+# the title heading...
+#
+#SetEnv VHOSTINDEXER_HEADER_CONTENT '<strong>More index for your index</strong>'
 
+#
+# The content that should be place just before the list of vhosts in the main 
+# division of the index page...
+#
 #SetEnv VHOSTINDEXER_PRE_CONTENT '<p>These are the web servers that are hosted on this web server.</p>'
 
-#SetEnv VHOSTINDEXER_POST_CONTENT ''
+#
+# The content that should be placed just after the list of vhosts in the main
+# division of the index page...
+#
+#SetEnv VHOSTINDEXER_POST_CONTENT '<p>Contact the site administrator for more information.</p>'
 
-#SetEnv VHOSTINDEXER_FOOTER_CONTENT ''
-
-#SetEnv VHOSTINDEXER_CSS_FILE 'style.css'
+#
+# The content that should be placed in the footer division of the index page...
+#
+#SetEnv VHOSTINDEXER_FOOTER_CONTENT '<p>&copy;The division of joy</p>'

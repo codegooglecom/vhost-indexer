@@ -1,0 +1,14 @@
+#!/bin/bash
+# ----------------------------------------------------------------------------
+# @file package_vhost-indexer
+# Create a vhost-indexer package for distribution
+# @author Alister Lewis-Bowen [alister@different.com]
+# ----------------------------------------------------------------------------
+
+VERSION=${1:-latest};
+PACKAGE_NAME=vhost-indexer_${VERSION};
+FILES='index.php htaccess.sample style.css README LICENSE';
+
+tar -cvf ${PACKAGE_NAME}.tar $FILES;
+gzip ${PACKAGE_NAME}.tar ;
+zip ${PACKAGE_NAME}.zip $FILES;
