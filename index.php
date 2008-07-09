@@ -37,6 +37,7 @@ function parseVirtualHosts($file) {
   
   $hostname = null;
   $port = '80';
+  $rule = false;
   
   while(!feof($fh)) {
     $line = fgets($fh);
