@@ -1,7 +1,7 @@
 <?php
 /**
- * @file Generate an index page which includes a list of virtual hosts 
- * on this system
+ * @file Generate an index page which includes a list of any virtual hosts 
+ * configured on the local system
  * @author Alister Lewis-Bowen [alister@different.com]
  * ----------------------------------------------------------------------------
  * This software is distributed under the the MIT License.
@@ -53,7 +53,7 @@ function parseVirtualHosts($file) {
       $rule = true;
     }
     
-    if (preg_match("/<\/VirtualHost>/i", $line)) {
+    if (preg_match("/<\/VirtualHost>/i", $line) && $hostname != $_SERVER['HTTP_HOST']) {
       $vhosts[] = $hostname . ($port == '80' ? '' : ':'. $port);
       $rule = false;
     }
@@ -87,7 +87,7 @@ $vhosts = parseVirtualHosts($vhost_conf);
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>
-            <?php print $title ?>
+            <?php print strip_tags($title) ?>
         </title>
         <?php if ($style_file): ?>
         <link href="<?php print $style_file ?>" type="text/css" media="all" rel="stylesheet"/>
